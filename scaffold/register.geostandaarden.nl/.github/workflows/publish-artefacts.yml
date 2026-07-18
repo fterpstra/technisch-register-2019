@@ -1,0 +1,137 @@
+# Reusable workflow that publishes the artefacts of a source repository
+# (an information model repo such as Geonovum/IMGeo or Kadaster/TOP10NL)
+# into the technisch register. It replaces the releasecreated.php webhook
+# of technisch-register-2019 and follows the same conventions as the
+# NL-ReSpec-template publication flow to docs.geostandaarden.nl:
+#
+#   pre-release -> committed directly to the develop branch (test environment)
+#   release     -> pull request to main, reviewed by the register maintainers
+#
+# Source repos call it with a small caller workflow on the release event,
+# see examples/source-repo-publish.yml. Only repositories listed in
+# config/repos.json are accepted; the artefact types come from
+# config/descriptions.json. Authentication uses the same GitHub App as the
+# docs.geostandaarden.nl flow (secrets GH_APP_ID / GH_APP_PRIVATE_KEY).
+
+name: Publish artefacts to technisch register
+
+on:
+  workflow_call:
+    inputs:
+      register_repository:
+        description: The register content repository (owner/repo)
+        type: string
+        default: Geonovum/register.geostandaarden.nl
+    secrets:
+      GH_APP_ID:
+        required: true
+      GH_APP_PRIVATE_KEY:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source repository at the release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          path: source
+
+      - name: Split register repository into owner and name
+        id: register
+        env:
+          REGISTER_REPO: ${{ inputs.register_repository }}
+        run: |
+          echo "owner=${REGISTER_REPO%%/*}" >> "$GITHUB_OUTPUT"
+          echo "name=${REGISTER_REPO#*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub App token for the register repository
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: ${{ steps.register.outputs.owner }}
+          repositories: ${{ steps.register.outputs.name }}
+
+      - name: Check out register repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.register_repository }}
+          token: ${{ steps.app-token.outputs.token }}
+          # pre-releases go straight to develop, releases via a PR to main
+          ref: ${{ github.event.release.prerelease && 'develop' || 'main' }}
+          path: register
+
+      - name: Look up this repository in the register configuration
+        id: repo-config
+        env:
+          REPO_HTML_URL: ${{ github.event.repository.html_url }}
+        run: |
+          repo_id=$(jq -r --arg url "$REPO_HTML_URL" \
+            'map(select(.url | ascii_downcase == ($url | ascii_downcase))) | first | .id // empty' \
+            register/config/repos.json)
+          if [ -z "$repo_id" ]; then
+            echo "::error::$REPO_HTML_URL is not listed in config/repos.json of ${{ inputs.register_repository }}. Add it there first."
+            exit 1
+          fi
+          echo "repo_id=$repo_id" >> "$GITHUB_OUTPUT"
+
+      - name: Copy artefact directories into the register
+        id: copy
+        env:
+          REPO_ID: ${{ steps.repo-config.outputs.repo_id }}
+        run: |
+          copied=""
+          for type in $(jq -r 'keys[]' register/config/descriptions.json); do
+            if [ -d "source/$type" ]; then
+              rm -rf "register/$type/$REPO_ID"
+              mkdir -p "register/$type/$REPO_ID"
+              cp -R "source/$type/." "register/$type/$REPO_ID/"
+              copied="$copied $type"
+            fi
+          done
+          if [ -z "$copied" ]; then
+            echo "::error::The release contains none of the artefact directories listed in config/descriptions.json."
+            exit 1
+          fi
+          echo "Copied artefact types:$copied"
+          echo "types=$copied" >> "$GITHUB_OUTPUT"
+
+      - name: Push pre-release to develop (test environment)
+        if: github.event.release.prerelease
+        working-directory: register
+        run: |
+          git config user.name "geonovum-register-bot"
+          git config user.email "actions@geonovum.nl"
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No changes compared to develop, nothing to publish."
+            exit 0
+          fi
+          git commit -m "Pre-release ${{ github.event.release.tag_name }} of ${{ github.repository }} (${{ steps.repo-config.outputs.repo_id }})"
+          git push origin develop
+
+      - name: Open pull request to main (production)
+        if: ${{ !github.event.release.prerelease }}
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          path: register
+          branch: publish/${{ steps.repo-config.outputs.repo_id }}-${{ github.event.release.tag_name }}
+          base: main
+          commit-message: "Release ${{ github.event.release.tag_name }} of ${{ github.repository }} (${{ steps.repo-config.outputs.repo_id }})"
+          title: "Automated update from ${{ github.repository }} ${{ github.event.release.tag_name }} to main"
+          body: |
+            Automated publication to the technisch register.
+
+            * Source: ${{ github.event.repository.html_url }}
+            * Release: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})
+            * Model id: `${{ steps.repo-config.outputs.repo_id }}`
+            * Artefact types:${{ steps.copy.outputs.types }}
+
+            Merging this PR deploys the artefacts to production.

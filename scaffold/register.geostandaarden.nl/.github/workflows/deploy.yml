@@ -1,0 +1,102 @@
+# Validates incoming artefacts on pull requests and deploys the repository
+# content to the webserver on push, following the same pattern (and the same
+# secret names) as Geonovum/docs.geostandaarden.nl:
+#
+#   main    -> rsync to SSH_TARGET_DIR_PROD  (register.geostandaarden.nl)
+#   develop -> rsync to SSH_TARGET_DIR_DEV   (test.register.geostandaarden.nl)
+#
+# TODO once both sites are migrated: extract the deploy job into a reusable
+# workflow shared with docs.geostandaarden.nl so it is maintained in one place.
+
+name: Validate and deploy
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate changed artefacts
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changed XML-based files
+        id: changed
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            **/*.xsd
+            **/*.xml
+            **/*.sch
+            **/*.wsdl
+            **/*.gml
+            **/*.sld
+
+      - name: Check XML well-formedness
+        if: steps.changed.outputs.any_changed == 'true'
+        env:
+          CHANGED_FILES: ${{ steps.changed.outputs.all_changed_files }}
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q libxml2-utils
+          status=0
+          for f in $CHANGED_FILES; do
+            if ! xmllint --noout "$f"; then
+              echo "::error file=$f::Not well-formed XML"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Validate register configuration
+        run: |
+          for f in config/repos.json config/cluster.json config/descriptions.json; do
+            jq empty "$f" || { echo "::error file=$f::Invalid JSON"; exit 1; }
+          done
+          # every repo must have an id and a github url, and ids must be unique
+          jq -e 'all(.[]; .id != null and .url != null)' config/repos.json > /dev/null
+          test "$(jq 'length' config/repos.json)" = "$(jq '[.[].id] | unique | length' config/repos.json)"
+
+  deploy:
+    name: Deploy to webserver
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'test' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set target directory for branch
+        id: target
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "dir=${{ secrets.SSH_TARGET_DIR_PROD }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=${{ secrets.SSH_TARGET_DIR_DEV }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Rsync to webserver
+        run: |
+          rsync -rlptvz --delete \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.gitignore' \
+            --exclude '.gitattributes' \
+            --exclude 'README.md' \
+            --exclude 'MIGRATION.md' \
+            --exclude 'examples/' \
+            ./ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ steps.target.outputs.dir }}"
