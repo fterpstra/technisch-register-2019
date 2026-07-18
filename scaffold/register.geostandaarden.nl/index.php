@@ -101,6 +101,14 @@ if (!$indexPage && !$clusterPage && $repoData == False) {
   </header>
   <article class="exp">
    <?php if ($clusterPage || $indexPage) { ?>
+   <?php if ($clusterPage) { ?>
+   <h2>
+    <?=$clusterData["titel"];?>
+   </h2>
+   <p>
+    <?=$clusterData["beschrijving"];?>
+   </p>
+   <?php } else { ?>
    <h2>
     Technisch register voor geo-standaarden in Nederland
    </h2>
@@ -118,6 +126,7 @@ if (!$indexPage && !$clusterPage && $repoData == False) {
     </a>
     . Ook Nederlandse geo-standaarden die niet bij Geonovum in beheer zijn, maar wél onderdeel van het NEN3610 stelsel zijn, zijn hier te vinden. Dit kan ofwel fysiek, ofwel via een referentie zijn naar een eigen register van de beheerder van de desbetreffende standaard.
    </p>
+   <?php } ?>
    <div id="container">
     <div id="leftcolumn">
       <h3>
@@ -174,8 +183,9 @@ if (!$indexPage && !$clusterPage && $repoData == False) {
     </div>
     <?php } else {
       // This means this is not a cluster page and not the index page
-      // So we are in a repo page, for a specific model. Build the information for this
-      $pageData = $clusterData ? $clusterData : $repoData;
+      // So we are in a model page: show the model's own titel and beschrijving
+      // from repos.json (cluster.json only as fallback)
+      $pageData = $repoData ? $repoData : $clusterData;
       ?>
       <div>
       <h2>

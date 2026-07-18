@@ -98,5 +98,6 @@ jobs:
             --exclude '.gitattributes' \
             --exclude 'README.md' \
             --exclude 'MIGRATION.md' \
+            --exclude 'documentatie/' \
             --exclude 'examples/' \
             ./ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ steps.target.outputs.dir }}"

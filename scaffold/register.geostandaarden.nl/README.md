@@ -81,6 +81,11 @@ fetches at request time). URL rewriting is handled by [`.htaccess`](.htaccess).
 
 ## For register maintainers
 
+Full maintainer documentation (reviewing PRs, adding/removing models, editing website
+texts, manual resync, server requirements) is in
+[documentatie/Handleiding voor beheerders technisch register.md](documentatie/Handleiding%20voor%20beheerders%20technisch%20register.md) [NL].
+In short:
+
 * Review automated PRs before merging: check that the model id and artefact types in the
   PR description are what you expect, and that the diff only touches
   `/{artefacttype}/{modelId}/` directories of that model. **Merging deploys to production.**
