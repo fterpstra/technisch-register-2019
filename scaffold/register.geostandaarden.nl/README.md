@@ -75,8 +75,8 @@ fetches at request time). URL rewriting is handled by [`.htaccess`](.htaccess).
 3. Structure the source repository with one directory per artefact type, named exactly
    as the keys of `config/descriptions.json` (`informatiemodel`, `xmlschema`,
    `gmlapplicatieschema`, `regels`, `waardelijst`, `wsdl`, `visualisatie`, `symbool`,
-   `zipfile`). See the existing
-   [guide for information model owners](https://github.com/Geonovum/technisch-register-2019/blob/master/documentatie/Handleiding%20voor%20beheerders%20informatiemodellen.md) [NL].
+   `zipfile`). See the
+   [guide for information model owners](documentatie/Handleiding%20voor%20beheerders%20informatiemodellen.md) [NL].
 4. Create a pre-release to test, then a release to publish.
 
 ## For register maintainers

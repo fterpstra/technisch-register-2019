@@ -34,6 +34,13 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # a normal release fires both the 'published' and 'released' events (see
+    # examples/source-repo-publish.yml); queue the two runs instead of letting
+    # them race on the same PR branch — the second run finds the PR already
+    # up to date and is a no-op
+    concurrency:
+      group: publish-to-register-${{ github.event.release.tag_name }}
+      cancel-in-progress: false
     steps:
       - name: Check out source repository at the release tag
         uses: actions/checkout@v4

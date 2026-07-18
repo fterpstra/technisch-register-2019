@@ -135,7 +135,8 @@ Kies één van de twee routes:
   sync dan handmatig (zie §6).
 
 De eisen aan de bronrepository zelf (mapnamen per artefacttype, releases maken) staan
-in de *Handleiding voor beheerders informatiemodellen*. De mapnamen moeten exact
+in de [Handleiding voor beheerders informatiemodellen](Handleiding%20voor%20beheerders%20informatiemodellen.md).
+De mapnamen moeten exact
 overeenkomen met de sleutels van `config/descriptions.json`: `zipfile`,
 `informatiemodel`, `gmlapplicatieschema`, `xmlschema`, `regels`, `waardelijst`,
 `wsdl`, `visualisatie`, `symbool`.

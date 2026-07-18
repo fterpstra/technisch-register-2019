@@ -63,8 +63,8 @@ if a step takes a while.
 * Extract the deploy job of `deploy.yml` and the PR-creation logic of
   `publish-artefacts.yml` into reusable workflows shared with
   docs.geostandaarden.nl, so both sites are maintained in one place.
-* The register-maintainer guide has already been rewritten for this mechanism
-  (`documentatie/Handleiding voor beheerders technisch register.md`). The guide
-  for model owners still needs an update of how publishing is triggered
-  (caller workflow or daily sync instead of a webhook) — the repository
-  structure requirements are identical.
+* Both guides in `documentatie/` have been rewritten for this mechanism: the
+  register-maintainer guide and the guide for model owners (whose trigger
+  section now describes the caller workflow and the daily sync instead of the
+  removed webhook). Point model owners to the new guide when rolling out the
+  caller workflow.

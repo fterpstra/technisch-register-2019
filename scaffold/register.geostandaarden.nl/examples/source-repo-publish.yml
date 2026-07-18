@@ -16,7 +16,12 @@ name: Publish release to technisch register
 
 on:
   release:
-    types: [published]
+    # 'published' fires when a release or pre-release is published;
+    # 'released' additionally covers promoting an existing pre-release to a
+    # full release (edit release -> uncheck "pre-release"). A normal release
+    # fires both events; the reusable workflow serializes and deduplicates
+    # the two runs.
+    types: [published, released]
 
 jobs:
   publish:
