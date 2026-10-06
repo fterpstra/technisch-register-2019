@@ -74,8 +74,8 @@ fetches at request time). URL rewriting is handled by [`.htaccess`](.htaccess).
    instead — no changes in the source repo needed.
 3. Structure the source repository with one directory per artefact type, named exactly
    as the keys of `config/descriptions.json` (`informatiemodel`, `xmlschema`,
-   `gmlapplicatieschema`, `regels`, `waardelijst`, `wsdl`, `visualisatie`, `symbool`,
-   `zipfile`). See the
+   `jsonschema`, `shacl`, `gmlapplicatieschema`, `regels`, `waardelijst`, `wsdl`,
+   `visualisatie`, `symbool`, `zipfile`). See the
    [guide for information model owners](documentatie/Handleiding%20voor%20beheerders%20informatiemodellen.md) [NL].
 4. Create a pre-release to test, then a release to publish.
 

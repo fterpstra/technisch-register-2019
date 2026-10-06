@@ -84,7 +84,7 @@ Betekenis van de velden en waar ze op de website verschijnen:
 
 | Veld | Gebruik |
 |---|---|
-| `id` | Bepaalt de URL's: de modelpagina (`/{id}` of `/{cluster}/{id}`) en de artefactmappen (`/xmlschema/{id}/` enz.). Kleine letters en cijfers, geen spaties. Verandert dit later, dan veranderen de URL's mee — vermijd dat. |
+| `id` | Bepaalt de URL's: de modelpagina (`/{id}` of `/{cluster}/{id}`) en de artefactmappen (`/xmlschema/{id}/` enz.). Minimaal 2 tekens: kleine letters, cijfers, `-` of `_` (bijv. `nl-sbb`); de CI-controle weigert andere id's. Verandert dit later, dan veranderen de URL's mee — vermijd dat. |
 | `cluster` | Het `id` van het cluster waar het model onder valt (bijv. `"brt"`), of `""` als het model niet in een cluster zit. |
 | `titel` | De paginatitel (kop) van de modelpagina. |
 | `titel_kort` | De linktekst naar het model in het kruimelpad en in de modellenlijst op een clusterpagina. |
@@ -132,14 +132,14 @@ Kies één van de twee routes:
   organisaties (bijv. Kadaster) moeten ze als repository secret toevoegen.
 * **Niets doen in de bronrepository**: de dagelijkse sync-workflow pikt de laatste
   release vanzelf op (uiterlijk de volgende ochtend). Wil je niet wachten, draai de
-  sync dan handmatig (zie §6).
+  sync dan handmatig (zie §7).
 
 De eisen aan de bronrepository zelf (mapnamen per artefacttype, releases maken) staan
 in de [Handleiding voor beheerders informatiemodellen](Handleiding%20voor%20beheerders%20informatiemodellen.md).
 De mapnamen moeten exact
 overeenkomen met de sleutels van `config/descriptions.json`: `zipfile`,
-`informatiemodel`, `gmlapplicatieschema`, `xmlschema`, `regels`, `waardelijst`,
-`wsdl`, `visualisatie`, `symbool`.
+`informatiemodel`, `gmlapplicatieschema`, `xmlschema`, `jsonschema`, `shacl`,
+`regels`, `waardelijst`, `wsdl`, `visualisatie`, `symbool`.
 
 ## 4. Een informatiemodel verwijderen
 
@@ -148,7 +148,17 @@ eventuele blok met hetzelfde `id` uit `config/cluster.json` verwijdert, en (3) d
 mappen `/{artefacttype}/{model-id}/` verwijdert. Na de merge verdwijnt het model van
 de website; de deploy verwijdert de bestanden ook op de server.
 
-## 5. Teksten van de website aanpassen
+## 5. Een nieuw artefacttype toevoegen
+
+Voeg in `config/descriptions.json` een sleutel toe met `titel` en `beschrijving`
+(HTML toegestaan); de sleutel is de mapnaam die bronrepositories gebruiken. Dat is
+alles: de publicatie-workflows, de lijsten op de website en de directory listings
+volgen automatisch, en `.htaccess` hoeft niet te worden aangepast omdat bestaande
+mappen altijd worden uitgezonderd van de rewrite-regels. Voeg eventueel een icoon
+toe in `$descriptionIcons` in `listDescriptions.php` (standaard `fa-file-o`) en werk
+de tabel met artefacttypen in de handleiding voor beheerders informatiemodellen bij.
+
+## 6. Teksten van de website aanpassen
 
 * **Beschrijvingen van artefacttypen** (rechterkolom hoofdpagina, kolommen op cluster-
   en modelpagina's): `config/descriptions.json`, velden `titel` en `beschrijving`
@@ -162,7 +172,7 @@ de website; de deploy verwijdert de bestanden ook op de server.
 Ook dit zijn gewone pull requests: eerst naar `develop` mergen om op de testomgeving
 te kijken kan altijd, mergen naar `main` publiceert naar productie.
 
-## 6. Handmatig synchroniseren en opnieuw deployen
+## 7. Handmatig synchroniseren en opnieuw deployen
 
 * **Eén model of alles opnieuw ophalen**: ga in GitHub naar *Actions* → *Sync releases
   from source repositories* → *Run workflow*. Vul bij `repo_id` een model-id in om één
@@ -173,7 +183,7 @@ te kijken kan altijd, mergen naar `main` publiceert naar productie.
   serveronderhoud): *Actions* → *Validate and deploy* → *Run workflow*, met `main`
   (productie) of `develop` (test) als branch.
 
-## 7. Testomgeving
+## 8. Testomgeving
 
 De testomgeving https://test.register.geostandaarden.nl/ toont altijd de `develop`
 branch. Er zijn drie manieren om daar iets op te zetten:
@@ -191,7 +201,7 @@ eventueel met `?url=brt` e.d.). Let op: de ingebouwde PHP-server toont geen
 directory listings van de artefactmappen en past geen `.htaccess` toe; voor een
 volledige test dient de testomgeving.
 
-## 8. Server en secrets
+## 9. Server en secrets
 
 Voor publicatie en beheer is geen servertoegang nodig. SSH-toegang is alleen nodig
 voor de Apache/PHP-configuratie zelf. De webserver vereist Apache met `mod_rewrite`
@@ -210,7 +220,7 @@ In de repository (Settings → Secrets and variables → Actions) staan:
 Verder moet in de Actions-instellingen van de repository *"Allow GitHub Actions to
 create and approve pull requests"* aan staan (nodig voor de sync-workflow).
 
-## 9. Afhankelijkheden
+## 10. Afhankelijkheden
 
 * Webserver: Apache (`mod_rewrite`, directory listings) en PHP ≥ 7.2. De PHP-pagina's
   gebruiken geen database en doen geen externe requests; de configuratie wordt uit de

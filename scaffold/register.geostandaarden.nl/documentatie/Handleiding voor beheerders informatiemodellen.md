@@ -38,6 +38,8 @@ artefacttypen die het register kent; mappen met andere namen worden genegeerd):
 * `informatiemodel`
 * `gmlapplicatieschema`
 * `xmlschema`
+* `jsonschema`
+* `shacl`
 * `regels`
 * `waardelijst`
 * `wsdl`
@@ -50,14 +52,19 @@ Per artefacttype worden de volgende bestandsextensies verwacht:
 
 | Artefact-type | Bestandsextensie |
 |---|---|
-| informatiemodel | .xmi, .eap |
+| informatiemodel | .xmi, .eap, .qea |
 | gmlapplicatieschema | .xsd |
 | xmlschema | .xsd, .wsdl (mag een diepere mappenstructuur bevatten) |
+| jsonschema | .json |
+| shacl | .ttl, .rdf, .jsonld |
 | regels | .sch |
-| waardelijst | .xls, .pdf, .doc, .rdf, .xml |
+| waardelijst | .xlsx, .csv, .rdf, .ttl, .xml, .pdf |
 | wsdl | .wsdl |
-| visualisatie | .xml (mag een diepere mappenstructuur bevatten) |
-| symbool | .eps, .png, .svg |
+| visualisatie | .xml, .sld (mag een diepere mappenstructuur bevatten) |
+| symbool | .svg, .png, .eps |
+| zipfile | .zip |
+
+De mapnaam is hoofdlettergevoelig: `SHACL/` of `Shacl/` wordt niet herkend.
 
 Voor `<versie>` adviseren wij te werken volgens
 [BOMOS](https://www.forumstandaardisatie.nl/fileadmin/os/publicaties/HR_BOMOS__FINAL_web.pdf):

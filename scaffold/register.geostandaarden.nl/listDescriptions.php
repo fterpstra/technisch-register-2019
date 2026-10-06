@@ -15,6 +15,8 @@ The "beschrijving" values may contain HTML (e.g. links).
 $descriptionIcons = [
   "gmlapplicatieschema" => "fa-file-code-o",
   "xmlschema" => "fa-file-code-o",
+  "jsonschema" => "fa-file-code-o",
+  "shacl" => "fa-file-code-o",
   "regels" => "fa-file-code-o",
   "waardelijst" => "fa-file-text-o",
   "symbool" => "fa-file-image-o",
