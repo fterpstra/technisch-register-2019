@@ -1,0 +1,31 @@
+# Caller workflow for source repositories (information model repos).
+#
+# Copy this file to .github/workflows/publish-to-register.yml in the source
+# repository (e.g. Geonovum/IMGeo). Requirements:
+#  - the repository is listed in config/repos.json of the register;
+#  - the Geonovum publication GitHub App secrets (GH_APP_ID and
+#    GH_APP_PRIVATE_KEY) are available to the repository — for Geonovum
+#    repositories these are organisation secrets, other organisations add
+#    them as repository secrets.
+#
+# Publishing then works exactly like docs.geostandaarden.nl:
+#   create a pre-release -> artefacts appear on the test environment
+#   create a release     -> a PR to the register is opened for review
+
+name: Publish release to technisch register
+
+on:
+  release:
+    # 'published' fires when a release or pre-release is published;
+    # 'released' additionally covers promoting an existing pre-release to a
+    # full release (edit release -> uncheck "pre-release"). A normal release
+    # fires both events; the reusable workflow serializes and deduplicates
+    # the two runs.
+    types: [published, released]
+
+jobs:
+  publish:
+    uses: Geonovum/register.geostandaarden.nl/.github/workflows/publish-artefacts.yml@main
+    secrets:
+      GH_APP_ID: ${{ secrets.GH_APP_ID }}
+      GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
