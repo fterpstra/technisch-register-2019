@@ -1,0 +1,131 @@
+# publiccode.yml: metadata for discovery and reuse of this software by public administrations.
+# Standard: https://publiccodeyml.github.io/v0/ - validate with https://github.com/italia/publiccode-parser-go
+
+publiccodeYmlVersion: "0.4"
+
+name: Technisch register
+url: "https://github.com/Geonovum/technisch-register-2019"
+landingURL: "https://register.geostandaarden.nl"
+
+platforms:
+  - web
+
+categories:
+  - geographic-information-systems
+  - document-management
+
+developmentStatus: stable
+
+softwareType: "standalone/web"
+
+intendedAudience:
+  countries:
+    - nl
+  scope:
+    - government
+
+description:
+  nl:
+    localisedName: Technisch register voor geo-standaarden
+    shortDescription: >-
+      Publiceert de technische bestanden van Nederlandse geo-standaarden
+      automatisch vanuit GitHub op register.geostandaarden.nl.
+    longDescription: |
+      Het technisch register is de centrale vindplaats voor de technische
+      bestanden van de informatiemodellen uit het NEN3610-stelsel en andere
+      Nederlandse geo-standaarden: UML-informatiemodellen, GML-applicatieschema's,
+      XML- en JSON-schema's, SHACL-shapes, Schematron-regels, waardelijsten,
+      WSDL's, visualisatieregels en symbolen. Het register wordt beheerd door
+      Geonovum en draait op <https://register.geostandaarden.nl>.
+
+      Beheerders van een standaard publiceren zelf, vanuit hun eigen
+      GitHub-repository. Ze zetten de bestanden in een vaste mappenstructuur
+      per artefacttype en maken een release. GitHub meldt de release via een
+      ondertekende webhook aan het register, dat de zip van de release-tag
+      ophaalt en de herkende mappen publiceert onder stabiele URL's van de vorm
+      `/<artefacttype>/<standaard>/<versie>/<bestand>`. Alleen repositories die
+      in de configuratie zijn aangemeld kunnen publiceren, en alleen tags van
+      die repository zelf.
+
+      De website toont een overzicht van alle standaarden, pagina's per cluster
+      van standaarden (zoals BRT en de RO-standaarden) en per standaard met de
+      beschikbare artefacttypen, en directory listings van alle gepubliceerde
+      bestanden. Welke standaarden, clusters en artefacttypen er zijn, staat in
+      JSON-configuratiebestanden in deze repository; een wijziging daarin is
+      na het mergen direct actief.
+
+      De software bestaat uit een paar PHP-scripts voor Apache, zonder database.
+    documentation: "https://github.com/Geonovum/technisch-register-2019/blob/master/documentatie/HandleidingVoorBeheerdersInformatiemodellen.md"
+    features:
+      - Centrale vindplaats voor technische bestanden van geo-standaarden
+      - Automatische publicatie vanuit GitHub bij elke release
+      - Webhook met verplichte handtekening (webhookgeheim)
+      - Alleen aangemelde repositories en hun eigen tags kunnen publiceren
+      - Stabiele URL's per artefacttype, standaard en versie
+      - Overzichtspagina's per cluster en per standaard
+      - Directory listings van alle gepubliceerde bestanden
+      - Alleen toegestane bestandstypen; uitvoerbare bestanden worden geweigerd
+      - Configuratie van standaarden en artefacttypen in JSON op GitHub
+      - Lokaal log van alle publicaties
+  en:
+    localisedName: Technical register for geo-standards
+    shortDescription: >-
+      Publishes the technical files of Dutch geo-standards automatically from
+      GitHub at register.geostandaarden.nl.
+    longDescription: |
+      The technical register (technisch register) is the central place to find
+      the technical files of the information models of the Dutch NEN3610
+      framework and other Dutch geo-standards: UML information models, GML
+      application schemas, XML and JSON schemas, SHACL shapes, Schematron rules,
+      code lists, WSDLs, styling rules and symbols. The register is maintained
+      by Geonovum and runs at <https://register.geostandaarden.nl>.
+
+      Maintainers of a standard publish themselves, from their own GitHub
+      repository. They put the files in a fixed directory structure per
+      artefact type and create a release. GitHub announces the release to the
+      register with a signed webhook; the register downloads the archive of the
+      release tag and publishes the recognised directories under stable URLs of
+      the form `/<artefact type>/<standard>/<version>/<file>`. Only repositories
+      registered in the configuration can publish, and only tags of that
+      repository itself.
+
+      The website shows an overview of all standards, pages per cluster of
+      standards and per standard with the available artefact types, and
+      directory listings of all published files. The standards, clusters and
+      artefact types are configured in JSON files in this repository.
+
+      The software consists of a few PHP scripts for Apache, without a database.
+    documentation: "https://github.com/Geonovum/technisch-register-2019#readme"
+    features:
+      - Central place to find the technical files of geo-standards
+      - Automatic publication from GitHub on every release
+      - Webhook with mandatory signature (shared secret)
+      - Only registered repositories and their own tags can publish
+      - Stable URLs per artefact type, standard and version
+      - Overview pages per cluster and per standard
+      - Directory listings of all published files
+      - Only allowed file types; executable files are refused
+      - Configuration of standards and artefact types in JSON on GitHub
+      - Local log of all publications
+
+legal:
+  license: MIT
+  mainCopyrightOwner: Geonovum
+
+maintenance:
+  type: internal
+  contacts:
+    - name: Frank Terpstra
+      affiliation: Geonovum
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - nl
+
+dependsOn:
+  open:
+    - name: PHP
+      versionMin: "7.2"
+    - name: Apache HTTP Server
+      versionMin: "2.4"
