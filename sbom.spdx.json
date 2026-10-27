@@ -1,0 +1,364 @@
+{
+  "@context": "https://spdx.org/rdf/3.0.1/spdx-context.jsonld",
+  "@graph": [
+    {
+      "type": "CreationInfo",
+      "@id": "_:creationinfo",
+      "specVersion": "3.0.1",
+      "created": "2026-10-27T13:06:27Z",
+      "createdBy": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#geonovum"
+      ]
+    },
+    {
+      "type": "Organization",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#geonovum",
+      "creationInfo": "_:creationinfo",
+      "name": "Geonovum",
+      "externalIdentifier": [
+        {
+          "type": "ExternalIdentifier",
+          "externalIdentifierType": "urlScheme",
+          "identifier": "https://www.geonovum.nl"
+        }
+      ]
+    },
+    {
+      "type": "software_Package",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register",
+      "creationInfo": "_:creationinfo",
+      "name": "technisch-register-2019",
+      "summary": "Technisch register voor geo-standaarden: publiceert de technische bestanden van Nederlandse geo-standaarden vanuit GitHub op register.geostandaarden.nl",
+      "suppliedBy": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#geonovum",
+      "software_primaryPurpose": "application",
+      "software_downloadLocation": "https://github.com/Geonovum/technisch-register-2019",
+      "software_homePage": "https://register.geostandaarden.nl",
+      "software_packageUrl": "pkg:github/Geonovum/technisch-register-2019",
+      "software_copyrightText": "Copyright (c) 2019 Geonovum"
+    },
+    {
+      "type": "simplelicensing_LicenseExpression",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT",
+      "creationInfo": "_:creationinfo",
+      "simplelicensing_licenseExpression": "MIT"
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-1",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register",
+      "relationshipType": "hasDeclaredLicense",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT"
+      ]
+    },
+    {
+      "type": "software_Package",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery",
+      "creationInfo": "_:creationinfo",
+      "name": "jquery",
+      "software_packageVersion": "1.9.1",
+      "summary": "jQuery JavaScript Library",
+      "comment": "bundled in src/resources and served by the website, but not referenced by any page",
+      "software_primaryPurpose": "library",
+      "software_packageUrl": "pkg:npm/jquery@1.9.1",
+      "software_homePage": "https://jquery.com"
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-2",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery",
+      "relationshipType": "hasDeclaredLicense",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT"
+      ]
+    },
+    {
+      "type": "software_File",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-1.9.1.js",
+      "creationInfo": "_:creationinfo",
+      "name": "src/resources/js/jquery-1.9.1.js",
+      "software_primaryPurpose": "source",
+      "verifiedUsing": [
+        {
+          "type": "Hash",
+          "algorithm": "sha1",
+          "hashValue": "9257afd2d46c3a189ec0d40a45722701d47e9ca5"
+        },
+        {
+          "type": "Hash",
+          "algorithm": "sha256",
+          "hashValue": "7bd80d06c01c0340c1b9159b9b4a197db882ca18cbac8e9b9aa025e68f998d40"
+        }
+      ]
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-3",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery",
+      "relationshipType": "contains",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-1.9.1.js"
+      ]
+    },
+    {
+      "type": "software_Package",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery-ui",
+      "creationInfo": "_:creationinfo",
+      "name": "jquery-ui",
+      "software_packageVersion": "1.10.1",
+      "summary": "jQuery UI",
+      "comment": "bundled in src/resources and served by the website, but not referenced by any page",
+      "software_primaryPurpose": "library",
+      "software_packageUrl": "pkg:npm/jquery-ui@1.10.1",
+      "software_homePage": "https://jqueryui.com"
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-4",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery-ui",
+      "relationshipType": "hasDeclaredLicense",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT"
+      ]
+    },
+    {
+      "type": "software_File",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-ui-1.10.1.min.js",
+      "creationInfo": "_:creationinfo",
+      "name": "src/resources/js/jquery-ui-1.10.1.min.js",
+      "software_primaryPurpose": "source",
+      "verifiedUsing": [
+        {
+          "type": "Hash",
+          "algorithm": "sha1",
+          "hashValue": "6ccdd8a368e50542c1ab2844b5fb7a8e71ad9c84"
+        },
+        {
+          "type": "Hash",
+          "algorithm": "sha256",
+          "hashValue": "ea0f93660d89caf4dd16b3aac3b49d9bd171551f8244f0b1e2493b71434d44db"
+        }
+      ]
+    },
+    {
+      "type": "software_File",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-css-jquery-ui-1.10.1.min.css",
+      "creationInfo": "_:creationinfo",
+      "name": "src/resources/css/jquery-ui-1.10.1.min.css",
+      "software_primaryPurpose": "source",
+      "verifiedUsing": [
+        {
+          "type": "Hash",
+          "algorithm": "sha1",
+          "hashValue": "8439cfd7339641d84019e47cd8b500be45a21902"
+        },
+        {
+          "type": "Hash",
+          "algorithm": "sha256",
+          "hashValue": "75f43b287478b79e7847db86300c04a77201cc8d627abd463f15e70ddad36a89"
+        }
+      ]
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-5",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery-ui",
+      "relationshipType": "contains",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-ui-1.10.1.min.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-css-jquery-ui-1.10.1.min.css"
+      ]
+    },
+    {
+      "type": "software_Package",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-modernizr",
+      "creationInfo": "_:creationinfo",
+      "name": "modernizr",
+      "software_packageVersion": "2.6.2",
+      "summary": "Modernizr",
+      "comment": "bundled in src/resources and served by the website, but not referenced by any page",
+      "software_primaryPurpose": "library",
+      "software_packageUrl": "pkg:npm/modernizr@2.6.2",
+      "software_homePage": "https://modernizr.com"
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-6",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-modernizr",
+      "relationshipType": "hasDeclaredLicense",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT"
+      ]
+    },
+    {
+      "type": "software_File",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-modernizr.js",
+      "creationInfo": "_:creationinfo",
+      "name": "src/resources/js/modernizr.js",
+      "software_primaryPurpose": "source",
+      "verifiedUsing": [
+        {
+          "type": "Hash",
+          "algorithm": "sha1",
+          "hashValue": "280ac744c39f41acbddd3517384f84a20745205e"
+        },
+        {
+          "type": "Hash",
+          "algorithm": "sha256",
+          "hashValue": "ce68fe41c2c6c11e6a038ef02ac49992152177c41652f0386e46132153877146"
+        }
+      ]
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-7",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-modernizr",
+      "relationshipType": "contains",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-modernizr.js"
+      ]
+    },
+    {
+      "type": "software_Package",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-font-awesome",
+      "creationInfo": "_:creationinfo",
+      "name": "font-awesome",
+      "software_packageVersion": "4.2.0",
+      "summary": "Font Awesome icon font and CSS",
+      "comment": "loaded at runtime from a CDN by src/index.php; not bundled",
+      "software_primaryPurpose": "library",
+      "software_packageUrl": "pkg:npm/font-awesome@4.2.0",
+      "software_homePage": "https://fontawesome.com/v4/",
+      "software_downloadLocation": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+    },
+    {
+      "type": "simplelicensing_LicenseExpression",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-OFL-1-1-AND-MIT",
+      "creationInfo": "_:creationinfo",
+      "simplelicensing_licenseExpression": "OFL-1.1 AND MIT"
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-8",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-font-awesome",
+      "relationshipType": "hasDeclaredLicense",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-OFL-1-1-AND-MIT"
+      ]
+    },
+    {
+      "type": "Relationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-9",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register",
+      "relationshipType": "contains",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery-ui",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-modernizr"
+      ]
+    },
+    {
+      "type": "LifecycleScopedRelationship",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-10",
+      "creationInfo": "_:creationinfo",
+      "from": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register",
+      "relationshipType": "dependsOn",
+      "to": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-font-awesome"
+      ],
+      "scope": "runtime"
+    },
+    {
+      "type": "software_Sbom",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#sbom",
+      "creationInfo": "_:creationinfo",
+      "name": "SBOM technisch-register-2019",
+      "software_sbomType": [
+        "source"
+      ],
+      "rootElement": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register"
+      ],
+      "element": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#geonovum",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-1",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-2",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-1.9.1.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-3",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery-ui",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-4",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-ui-1.10.1.min.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-css-jquery-ui-1.10.1.min.css",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-5",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-modernizr",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-6",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-modernizr.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-7",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-font-awesome",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-OFL-1-1-AND-MIT",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-8",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-9",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-10"
+      ]
+    },
+    {
+      "type": "simplelicensing_LicenseExpression",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-CC0-1-0",
+      "creationInfo": "_:creationinfo",
+      "simplelicensing_licenseExpression": "CC0-1.0"
+    },
+    {
+      "type": "SpdxDocument",
+      "spdxId": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#document",
+      "creationInfo": "_:creationinfo",
+      "name": "SBOM technisch-register-2019",
+      "dataLicense": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-CC0-1-0",
+      "profileConformance": [
+        "core",
+        "software",
+        "simpleLicensing"
+      ],
+      "rootElement": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#sbom"
+      ],
+      "element": [
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#geonovum",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-technisch-register",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-MIT",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-1",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-2",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-1.9.1.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-3",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-jquery-ui",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-4",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-jquery-ui-1.10.1.min.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-css-jquery-ui-1.10.1.min.css",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-5",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-modernizr",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-6",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#file-src-resources-js-modernizr.js",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-7",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#package-font-awesome",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-OFL-1-1-AND-MIT",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-8",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-9",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#relationship-10",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#sbom",
+        "https://github.com/Geonovum/technisch-register-2019/sbom/spdx/48666f57-3380-428a-a285-b6afcf57d1f3#license-CC0-1-0"
+      ]
+    }
+  ]
+}

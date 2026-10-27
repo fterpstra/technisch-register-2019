@@ -42,3 +42,7 @@ The [Guide for registry maintainers](https://github.com/Geonovum/technisch-regis
 
 ### Tips
 If users update files via FTP, make sure these users are part of the appropriate group with write access (e.g. by adding the user to the www-data group, like `sudo usermod -aG {group} {user}`
+
+## Metadata and SBOM
+* [`publiccode.yml`](publiccode.yml) describes this software following the [publiccode.yml standard](https://publiccodeyml.github.io/v0/) (version 0.4), for catalogues of public sector software.
+* [`sbom.cdx.json`](sbom.cdx.json) ([CycloneDX](https://cyclonedx.org/) 1.7) and [`sbom.spdx.json`](sbom.spdx.json) ([SPDX](https://spdx.dev/) 3.0.1, JSON-LD) list the third-party components: jQuery 1.9.1, jQuery UI 1.10.1 and Modernizr 2.6.2 (bundled in `src/resources`, not used by any page) and Font Awesome 4.2.0 (loaded from a CDN by `index.php`). Update both files when a third-party component is added, removed or upgraded.
