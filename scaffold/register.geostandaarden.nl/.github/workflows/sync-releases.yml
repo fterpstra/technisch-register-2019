@@ -1,0 +1,126 @@
+# Pull-based fallback for the push flow in publish-artefacts.yml.
+#
+# Walks config/repos.json, fetches the latest release of every source
+# repository and opens a pull request per model when its artefacts differ
+# from what is currently in the register. Use it:
+#  - for source repositories that cannot install the caller workflow /
+#    GitHub App (e.g. repos outside the Geonovum organisation);
+#  - as a "resync everything" button after config changes;
+#  - as a daily safety net in case a push from a source repo failed.
+#
+# Requires "Allow GitHub Actions to create and approve pull requests" in the
+# repository (or organisation) Actions settings.
+
+name: Sync releases from source repositories
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_id:
+        description: "Only sync this model id from config/repos.json (empty = all)"
+        type: string
+        default: ""
+  schedule:
+    - cron: "30 5 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  list-repos:
+    runs-on: ubuntu-latest
+    outputs:
+      repos: ${{ steps.list.outputs.repos }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read source repositories from config
+        id: list
+        env:
+          ONLY_ID: ${{ inputs.repo_id }}
+        run: |
+          repos=$(jq -c --arg only "$ONLY_ID" \
+            '[.[] | select($only == "" or .id == $only) | {id, url}]' \
+            config/repos.json)
+          echo "repos=$repos" >> "$GITHUB_OUTPUT"
+          echo "Syncing: $(echo "$repos" | jq -r '[.[].id] | join(", ")')"
+
+  sync:
+    needs: list-repos
+    if: needs.list-repos.outputs.repos != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        repo: ${{ fromJson(needs.list-repos.outputs.repos) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest release of ${{ matrix.repo.id }}
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO_URL: ${{ matrix.repo.url }}
+        run: |
+          slug="${REPO_URL#https://github.com/}"
+          release=$(gh api "repos/$slug/releases/latest" 2>/dev/null || true)
+          tag=$(echo "$release" | jq -r '.tag_name // empty')
+          if [ -z "$tag" ]; then
+            echo "::notice::${{ matrix.repo.id }}: no releases found in $REPO_URL, skipping."
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "found=true" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "slug=$slug" >> "$GITHUB_OUTPUT"
+          echo "html_url=$(echo "$release" | jq -r '.html_url')" >> "$GITHUB_OUTPUT"
+
+      - name: Download and extract release
+        if: steps.release.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ steps.release.outputs.slug }}/zipball/${{ steps.release.outputs.tag }}" > /tmp/source.zip
+          mkdir -p /tmp/source
+          unzip -q /tmp/source.zip -d /tmp/source
+
+      - name: Copy artefact directories into the register
+        if: steps.release.outputs.found == 'true'
+        id: copy
+        env:
+          REPO_ID: ${{ matrix.repo.id }}
+        run: |
+          # the zipball contains a single top-level directory
+          content_dir=$(find /tmp/source -mindepth 1 -maxdepth 1 -type d | head -n 1)
+          copied=""
+          for type in $(jq -r 'keys[]' config/descriptions.json); do
+            if [ -d "$content_dir/$type" ]; then
+              rm -rf "$type/$REPO_ID"
+              mkdir -p "$type/$REPO_ID"
+              cp -R "$content_dir/$type/." "$type/$REPO_ID/"
+              copied="$copied $type"
+            fi
+          done
+          if [ -z "$copied" ]; then
+            echo "::warning::${{ matrix.repo.id }}: release ${{ steps.release.outputs.tag }} contains no known artefact directories."
+          fi
+          echo "types=$copied" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request when artefacts changed
+        if: steps.release.outputs.found == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: sync/${{ matrix.repo.id }}
+          base: main
+          commit-message: "Sync ${{ matrix.repo.id }} with release ${{ steps.release.outputs.tag }} of ${{ steps.release.outputs.slug }}"
+          title: "Automated sync of ${{ matrix.repo.id }} (${{ steps.release.outputs.tag }})"
+          body: |
+            Pull-based sync with the latest release of the source repository.
+
+            * Source: ${{ matrix.repo.url }}
+            * Release: [${{ steps.release.outputs.tag }}](${{ steps.release.outputs.html_url }})
+            * Model id: `${{ matrix.repo.id }}`
+            * Artefact types:${{ steps.copy.outputs.types }}
+
+            Merging this PR deploys the artefacts to production.

@@ -1,0 +1,29 @@
+# Rewrite rules for the technisch register.
+# Replaces conf/apache2/rewrite-rules.txt from technisch-register-2019.
+#
+# Physical directories (the artefact type directories such as /xmlschema and
+# /informatiemodel, and /resources) are excluded by the !-f/!-d conditions and
+# served directly by Apache, including the directory listings the register
+# relies on. Virtual paths (/{clusterId} and /{clusterId}/{repoId}) are
+# rewritten internally to index.php, so visitors keep the clean URL.
+#
+# The vhost must allow this: AllowOverride FileInfo Indexes (or All),
+# and Options +Indexes for the directory listings.
+
+DirectoryIndex index.php index.html
+RewriteEngine On
+
+# /{clusterId}/index.html (links on the main index page)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)/index\.html$ index.php?url=$1 [L]
+
+# /{clusterId} or /{repoId}
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?url=$1 [L]
+
+# /{clusterId}/{repoId}
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?url=$1/$2 [L]
