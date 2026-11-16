@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:4e4c29a1-bafa-4d82-a1ed-c3d7211e24d0",
+  "serialNumber": "urn:uuid:7ace98b5-d955-42d9-b313-f6e7b96e101f",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-06T09:23:04Z",
+    "timestamp": "2026-11-16T14:26:09Z",
     "lifecycles": [
       {
         "phase": "pre-build"
@@ -16,19 +16,19 @@
         {
           "type": "application",
           "name": "geonovum-sbom build_sbom.js",
-          "version": "1.2.0"
+          "version": "1.3.0"
         }
       ]
     },
     "properties": [
       {
         "name": "geonovum-sbom:commit",
-        "value": "738a1b59e27a0b8f9d0491ef694edaf692233b11"
+        "value": "6bde771f80d887b465d28db4febe21a5b56b7bc2"
       }
     ],
     "authors": [
       {
-        "name": "Frank Terpstra"
+        "name": "Frank Terpstra, Geonovum"
       }
     ],
     "manufacturer": {
@@ -45,16 +45,16 @@
     },
     "component": {
       "type": "application",
-      "bom-ref": "pkg:github/Geonovum/technisch-register-2019@738a1b59e27a0b8f9d0491ef694edaf692233b11",
+      "bom-ref": "pkg:github/Geonovum/technisch-register-2019@6bde771f80d887b465d28db4febe21a5b56b7bc2",
       "supplier": {
         "name": "Geonovum",
         "url": [
           "https://www.geonovum.nl"
         ]
       },
-      "name": "technisch-register-2019",
-      "version": "738a1b59e27a0b8f9d0491ef694edaf692233b11",
-      "description": "Technisch register voor geo-standaarden: publiceert de technische bestanden van Nederlandse geo-standaarden vanuit GitHub op register.geostandaarden.nl",
+      "name": "Technisch register",
+      "version": "6bde771f80d887b465d28db4febe21a5b56b7bc2",
+      "description": "PHP scripts that publish the technical files of Dutch geo-standards from GitHub releases on register.geostandaarden.nl",
       "licenses": [
         {
           "expression": "MIT",
@@ -62,7 +62,7 @@
         }
       ],
       "copyright": "Copyright (c) 2019 Geonovum",
-      "purl": "pkg:github/Geonovum/technisch-register-2019@738a1b59e27a0b8f9d0491ef694edaf692233b11",
+      "purl": "pkg:github/Geonovum/technisch-register-2019@6bde771f80d887b465d28db4febe21a5b56b7bc2",
       "externalReferences": [
         {
           "type": "vcs",
@@ -87,7 +87,7 @@
       },
       "name": "jquery",
       "version": "1.9.1",
-      "description": "jQuery JavaScript Library, including the Sizzle CSS selector engine",
+      "description": "jQuery JavaScript Library",
       "scope": "required",
       "hashes": [
         {
@@ -125,7 +125,7 @@
       "properties": [
         {
           "name": "geonovum-sbom:usage",
-          "value": "bundled in src/resources and publicly served under /resources, but not loaded by any page"
+          "value": "Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product."
         }
       ],
       "evidence": {
@@ -143,6 +143,70 @@
     },
     {
       "type": "library",
+      "bom-ref": "pkg:npm/sizzle@1.9.1",
+      "supplier": {
+        "name": "OpenJS Foundation",
+        "url": [
+          "https://openjsf.org"
+        ]
+      },
+      "name": "sizzle",
+      "version": "1.9.1",
+      "description": "Sizzle CSS Selector Engine, embedded in jQuery 1.9.1",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "9257afd2d46c3a189ec0d40a45722701d47e9ca5"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "7bd80d06c01c0340c1b9159b9b4a197db882ca18cbac8e9b9aa025e68f998d40"
+        },
+        {
+          "alg": "SHA-512",
+          "content": "d62700e7a1ff41f9d6326ca024ba2be1d391bc8fbb2aeae0f427d74837899b230940bf7c2df3d193f5300a68bb3686706d4c31328234b5cda026a1bf52ef9e70"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "MIT",
+          "acknowledgement": "concluded"
+        }
+      ],
+      "copyright": "Copyright 2012 jQuery Foundation and other contributors",
+      "purl": "pkg:npm/sizzle@1.9.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://sizzlejs.com"
+        }
+      ],
+      "properties": [
+        {
+          "name": "geonovum-sbom:embedded-in",
+          "value": "pkg:npm/jquery@1.9.1"
+        },
+        {
+          "name": "geonovum-sbom:hash-scope",
+          "value": "hash of the containing file src/resources/js/jquery-1.9.1.js, which also holds jquery"
+        }
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/resources/js/jquery-1.9.1.js"
+          }
+        ],
+        "copyright": [
+          {
+            "text": "Copyright 2012 jQuery Foundation and other contributors"
+          }
+        ]
+      }
+    },
+    {
+      "type": "library",
       "bom-ref": "pkg:npm/jquery-ui@1.10.1",
       "supplier": {
         "name": "OpenJS Foundation",
@@ -152,7 +216,7 @@
       },
       "name": "jquery-ui",
       "version": "1.10.1",
-      "description": "jQuery UI custom build (all widgets and effects) with a ThemeRoller theme",
+      "description": "jQuery UI custom build (JavaScript and theme CSS) of 2013-02-28",
       "scope": "required",
       "licenses": [
         {
@@ -161,22 +225,18 @@
         }
       ],
       "copyright": "Copyright (c) 2013 jQuery Foundation and other contributors",
-      "cpe": "cpe:2.3:a:jqueryui:jquery_ui:1.10.1:*:*:*:*:*:*:*",
+      "cpe": "cpe:2.3:a:jquery:jquery_ui:1.10.1:*:*:*:*:*:*:*",
       "purl": "pkg:npm/jquery-ui@1.10.1",
       "externalReferences": [
         {
           "type": "website",
           "url": "https://jqueryui.com"
-        },
-        {
-          "type": "distribution",
-          "url": "https://github.com/jquery/jquery-ui/tree/1.10.1"
         }
       ],
       "properties": [
         {
           "name": "geonovum-sbom:usage",
-          "value": "bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out"
+          "value": "Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product."
         }
       ],
       "evidence": {
@@ -246,7 +306,7 @@
       },
       "name": "modernizr",
       "version": "2.6.2",
-      "description": "Modernizr 2.6.2 custom build",
+      "description": "Modernizr custom build",
       "scope": "required",
       "hashes": [
         {
@@ -268,22 +328,17 @@
           "acknowledgement": "concluded"
         }
       ],
-      "copyright": "Copyright (c) Faruk Ates, Paul Irish, Alex Sexton",
       "purl": "pkg:npm/modernizr@2.6.2",
       "externalReferences": [
         {
           "type": "website",
           "url": "https://modernizr.com"
-        },
-        {
-          "type": "distribution",
-          "url": "https://github.com/Modernizr/Modernizr/tree/v2.6.2"
         }
       ],
       "properties": [
         {
           "name": "geonovum-sbom:usage",
-          "value": "bundled in src/resources and publicly served under /resources, but not loaded by any page"
+          "value": "Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page of the product."
         }
       ],
       "evidence": {
@@ -299,11 +354,6 @@
               "acknowledgement": "declared"
             }
           }
-        ],
-        "copyright": [
-          {
-            "text": "Copyright (c) Faruk Ates, Paul Irish, Alex Sexton"
-          }
         ]
       }
     },
@@ -315,7 +365,7 @@
       },
       "name": "yepnope",
       "version": "1.5.4",
-      "description": "Resource loader, embedded in the Modernizr custom build",
+      "description": "yepnope resource loader, embedded in the Modernizr build",
       "scope": "required",
       "hashes": [
         {
@@ -338,12 +388,6 @@
         }
       ],
       "purl": "pkg:npm/yepnope@1.5.4",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://github.com/SlexAxton/yepnope.js"
-        }
-      ],
       "properties": [
         {
           "name": "geonovum-sbom:embedded-in",
@@ -386,18 +430,24 @@
         {
           "type": "website",
           "url": "https://fontawesome.com/v4/"
-        },
-        {
-          "type": "distribution",
-          "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
         }
       ],
       "properties": [
         {
           "name": "geonovum-sbom:usage",
-          "value": "loaded at runtime from a CDN by src/index.php; the CSS loads the font files"
+          "value": "CSS loaded at runtime from a CDN by src/index.php (file icons on the standard pages); the CSS in turn loads the web fonts from the same CDN."
         }
       ],
+      "evidence": {
+        "licenses": [
+          {
+            "license": {
+              "name": "Font: SIL OFL 1.1, CSS: MIT License",
+              "acknowledgement": "declared"
+            }
+          }
+        ]
+      },
       "components": [
         {
           "type": "file",
@@ -451,26 +501,26 @@
         },
         {
           "type": "file",
-          "bom-ref": "pkg:npm/font-awesome@4.2.0#fonts/fontawesome-webfont.svg",
-          "name": "fonts/fontawesome-webfont.svg",
+          "bom-ref": "pkg:npm/font-awesome@4.2.0#fonts/fontawesome-webfont.woff",
+          "name": "fonts/fontawesome-webfont.woff",
           "hashes": [
             {
               "alg": "SHA-1",
-              "content": "cd980eab6db5fa57db670cb2e4278e67e1a4d6c9"
+              "content": "7d65e0227d0d7cdc1718119cd2a7dce0638f151c"
             },
             {
               "alg": "SHA-256",
-              "content": "d5b5636ebb2e124810436200086b74a60dff9e8a8be7f4a1088bf5d3458bc3c8"
+              "content": "199411f659f41aaccb959bacb1b0de30e54f244352a48c6f9894e65ae0f8a9a1"
             },
             {
               "alg": "SHA-512",
-              "content": "0920ae6b27ea8119e4697b974301a854686d3ca450197f95b0daab7647d8805e7e946dfda682ec2edb756a501cb170b2b89bffcdcdd5d1c17d165a0b99ec345f"
+              "content": "e96012d2fcd5df03c2f7385c9ee2a2932b3909659d59e32bf3155e102eaf9eb7b4b00c5806c892ace1b8f4bdb58630fb20868ad368c771bd8d2aad7749b7a399"
             }
           ],
           "externalReferences": [
             {
               "type": "distribution",
-              "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0"
+              "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0"
             }
           ]
         },
@@ -501,26 +551,26 @@
         },
         {
           "type": "file",
-          "bom-ref": "pkg:npm/font-awesome@4.2.0#fonts/fontawesome-webfont.woff",
-          "name": "fonts/fontawesome-webfont.woff",
+          "bom-ref": "pkg:npm/font-awesome@4.2.0#fonts/fontawesome-webfont.svg",
+          "name": "fonts/fontawesome-webfont.svg",
           "hashes": [
             {
               "alg": "SHA-1",
-              "content": "7d65e0227d0d7cdc1718119cd2a7dce0638f151c"
+              "content": "cd980eab6db5fa57db670cb2e4278e67e1a4d6c9"
             },
             {
               "alg": "SHA-256",
-              "content": "199411f659f41aaccb959bacb1b0de30e54f244352a48c6f9894e65ae0f8a9a1"
+              "content": "d5b5636ebb2e124810436200086b74a60dff9e8a8be7f4a1088bf5d3458bc3c8"
             },
             {
               "alg": "SHA-512",
-              "content": "e96012d2fcd5df03c2f7385c9ee2a2932b3909659d59e32bf3155e102eaf9eb7b4b00c5806c892ace1b8f4bdb58630fb20868ad368c771bd8d2aad7749b7a399"
+              "content": "0920ae6b27ea8119e4697b974301a854686d3ca450197f95b0daab7647d8805e7e946dfda682ec2edb756a501cb170b2b89bffcdcdd5d1c17d165a0b99ec345f"
             }
           ],
           "externalReferences": [
             {
               "type": "distribution",
-              "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0"
+              "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0"
             }
           ]
         }
@@ -538,7 +588,6 @@
       "name": "PHP",
       "isExternal": true,
       "versionRange": "vers:generic/>=7.2",
-      "description": "PHP runtime (README: version 7.2)",
       "scope": "required",
       "licenses": [
         {
@@ -548,10 +597,10 @@
       ],
       "cpe": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
       "purl": "pkg:generic/php",
-      "externalReferences": [
+      "properties": [
         {
-          "type": "website",
-          "url": "https://www.php.net"
+          "name": "geonovum-sbom:usage",
+          "value": "Runs src/index.php, src/listDescriptions.php, the help pages and the webhook in src/autodeploy; the README names PHP 7.2 as the version in use."
         }
       ]
     },
@@ -567,7 +616,6 @@
       "name": "PHP zip extension",
       "isExternal": true,
       "versionRange": "vers:generic/>=7.2",
-      "description": "ZipArchive, used by src/autodeploy to unpack release archives",
       "scope": "required",
       "licenses": [
         {
@@ -576,10 +624,10 @@
         }
       ],
       "purl": "pkg:generic/php-zip",
-      "externalReferences": [
+      "properties": [
         {
-          "type": "website",
-          "url": "https://www.php.net/manual/en/book.zip.php"
+          "name": "geonovum-sbom:usage",
+          "value": "ZipArchive unpacks the release zip in src/autodeploy/releasecreated.php."
         }
       ]
     },
@@ -595,7 +643,6 @@
       "name": "PHP openssl extension",
       "isExternal": true,
       "versionRange": "vers:generic/>=7.2",
-      "description": "Needed for file_get_contents on https URLs in src/autodeploy (configuration from raw.githubusercontent.com, release archives from github.com)",
       "scope": "required",
       "licenses": [
         {
@@ -604,10 +651,10 @@
         }
       ],
       "purl": "pkg:generic/php-openssl",
-      "externalReferences": [
+      "properties": [
         {
-          "type": "website",
-          "url": "https://www.php.net/manual/en/book.openssl.php"
+          "name": "geonovum-sbom:usage",
+          "value": "Needed for fopen() and file_get_contents() on https URLs (GitHub configuration files and release zips) in src/autodeploy."
         }
       ]
     },
@@ -623,7 +670,6 @@
       "name": "Apache HTTP Server",
       "isExternal": true,
       "versionRange": "vers:generic/>=2.4",
-      "description": "Web server with mod_rewrite (rules in conf/apache2/rewrite-rules.txt)",
       "scope": "required",
       "licenses": [
         {
@@ -633,17 +679,17 @@
       ],
       "cpe": "cpe:2.3:a:apache:http_server:*:*:*:*:*:*:*:*",
       "purl": "pkg:generic/apache-httpd",
-      "externalReferences": [
+      "properties": [
         {
-          "type": "website",
-          "url": "https://httpd.apache.org"
+          "name": "geonovum-sbom:usage",
+          "value": "Serves the site and the directory listings with mod_rewrite, configured with conf/apache2/rewrite-rules.txt and conf/apache2/artefact-directories.txt (Require syntax of Apache 2.4)."
         }
       ]
     }
   ],
   "dependencies": [
     {
-      "ref": "pkg:github/Geonovum/technisch-register-2019@738a1b59e27a0b8f9d0491ef694edaf692233b11",
+      "ref": "pkg:github/Geonovum/technisch-register-2019@6bde771f80d887b465d28db4febe21a5b56b7bc2",
       "dependsOn": [
         "pkg:npm/font-awesome@4.2.0",
         "component:php",
@@ -654,11 +700,19 @@
     },
     {
       "ref": "pkg:npm/jquery@1.9.1",
+      "dependsOn": [
+        "pkg:npm/sizzle@1.9.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/sizzle@1.9.1",
       "dependsOn": []
     },
     {
       "ref": "pkg:npm/jquery-ui@1.10.1",
-      "dependsOn": []
+      "dependsOn": [
+        "pkg:npm/jquery@1.9.1"
+      ]
     },
     {
       "ref": "pkg:npm/modernizr@2.6.2",
@@ -699,13 +753,13 @@
     {
       "aggregate": "incomplete",
       "assemblies": [
-        "pkg:github/Geonovum/technisch-register-2019@738a1b59e27a0b8f9d0491ef694edaf692233b11"
+        "pkg:github/Geonovum/technisch-register-2019@6bde771f80d887b465d28db4febe21a5b56b7bc2"
       ]
     },
     {
       "aggregate": "incomplete",
       "dependencies": [
-        "pkg:github/Geonovum/technisch-register-2019@738a1b59e27a0b8f9d0491ef694edaf692233b11"
+        "pkg:github/Geonovum/technisch-register-2019@6bde771f80d887b465d28db4febe21a5b56b7bc2"
       ]
     }
   ],
@@ -760,9 +814,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -812,9 +866,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -857,9 +911,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -909,9 +963,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -961,9 +1015,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -1006,9 +1060,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -1051,9 +1105,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {
@@ -1103,9 +1157,9 @@
       "analysis": {
         "state": "not_affected",
         "justification": "code_not_reachable",
-        "detail": "Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out.",
-        "firstIssued": "2026-11-06T09:23:04Z",
-        "lastUpdated": "2026-11-06T09:23:04Z"
+        "detail": "Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product..",
+        "firstIssued": "2026-11-16T14:26:09Z",
+        "lastUpdated": "2026-11-16T14:26:09Z"
       },
       "affects": [
         {

@@ -2,37 +2,37 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "technisch-register-2019-738a1b59e27a",
-  "documentNamespace": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx-2.3/4e4c29a1-bafa-4d82-a1ed-c3d7211e24d0",
+  "name": "Technisch register-6bde771f80d8",
+  "documentNamespace": "https://github.com/Geonovum/technisch-register-2019/sbom/spdx-2.3/7ace98b5-d955-42d9-b313-f6e7b96e101f",
   "creationInfo": {
-    "created": "2026-11-06T09:23:04Z",
+    "created": "2026-11-16T14:26:09Z",
     "creators": [
-      "Tool: geonovum-sbom-build_sbom.js-1.2.0",
+      "Tool: geonovum-sbom-build_sbom.js-1.3.0",
       "Organization: Geonovum",
-      "Person: Frank Terpstra"
+      "Person: Frank Terpstra, Geonovum"
     ],
-    "comment": "SBOM version 1. Generation context: pre-build (source). Companion CycloneDX 1.7 document: urn:uuid:4e4c29a1-bafa-4d82-a1ed-c3d7211e24d0."
+    "comment": "SBOM version 1. Generation context: pre-build (source). Companion CycloneDX 1.7 document: urn:uuid:7ace98b5-d955-42d9-b313-f6e7b96e101f."
   },
   "packages": [
     {
       "SPDXID": "SPDXRef-Package-product",
-      "name": "technisch-register-2019",
-      "versionInfo": "738a1b59e27a0b8f9d0491ef694edaf692233b11",
+      "name": "Technisch register",
+      "versionInfo": "6bde771f80d887b465d28db4febe21a5b56b7bc2",
       "supplier": "Organization: Geonovum",
       "originator": "Organization: Geonovum",
-      "downloadLocation": "git+https://github.com/Geonovum/technisch-register-2019.git@738a1b59e27a0b8f9d0491ef694edaf692233b11",
+      "downloadLocation": "git+https://github.com/Geonovum/technisch-register-2019.git@6bde771f80d887b465d28db4febe21a5b56b7bc2",
       "homepage": "https://register.geostandaarden.nl",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "copyrightText": "Copyright (c) 2019 Geonovum",
-      "description": "Technisch register voor geo-standaarden: publiceert de technische bestanden van Nederlandse geo-standaarden vanuit GitHub op register.geostandaarden.nl",
+      "description": "PHP scripts that publish the technical files of Dutch geo-standards from GitHub releases on register.geostandaarden.nl",
       "primaryPackagePurpose": "APPLICATION",
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:github/Geonovum/technisch-register-2019@738a1b59e27a0b8f9d0491ef694edaf692233b11"
+          "referenceLocator": "pkg:github/Geonovum/technisch-register-2019@6bde771f80d887b465d28db4febe21a5b56b7bc2"
         }
       ]
     },
@@ -68,8 +68,8 @@
         "MIT"
       ],
       "copyrightText": "Copyright 2005, 2012 jQuery Foundation, Inc. and other contributors",
-      "description": "jQuery JavaScript Library, including the Sizzle CSS selector engine",
-      "comment": "bundled in src/resources and publicly served under /resources, but not loaded by any page",
+      "description": "jQuery JavaScript Library",
+      "comment": "Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -86,19 +86,56 @@
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2019-11358",
-          "comment": "CVE-2019-11358: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page."
+          "comment": "CVE-2019-11358: not_affected - Not used by the product: Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product.."
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2020-11023",
-          "comment": "CVE-2020-11023: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page."
+          "comment": "CVE-2020-11023: not_affected - Not used by the product: Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product.."
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2015-9251",
-          "comment": "CVE-2015-9251: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page."
+          "comment": "CVE-2015-9251: not_affected - Not used by the product: Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page or script of the product.."
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Package-sizzle",
+      "name": "sizzle",
+      "versionInfo": "1.9.1",
+      "supplier": "Organization: OpenJS Foundation",
+      "originator": "Organization: OpenJS Foundation",
+      "downloadLocation": "NOASSERTION",
+      "homepage": "https://sizzlejs.com",
+      "filesAnalyzed": false,
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "9257afd2d46c3a189ec0d40a45722701d47e9ca5"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7bd80d06c01c0340c1b9159b9b4a197db882ca18cbac8e9b9aa025e68f998d40"
+        },
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "d62700e7a1ff41f9d6326ca024ba2be1d391bc8fbb2aeae0f427d74837899b230940bf7c2df3d193f5300a68bb3686706d4c31328234b5cda026a1bf52ef9e70"
+        }
+      ],
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "Copyright 2012 jQuery Foundation and other contributors",
+      "description": "Sizzle CSS Selector Engine, embedded in jQuery 1.9.1",
+      "comment": "Embedded in jquery; the checksums are those of the containing file src/resources/js/jquery-1.9.1.js.",
+      "primaryPackagePurpose": "OTHER",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/sizzle@1.9.1"
         }
       ]
     },
@@ -108,7 +145,7 @@
       "versionInfo": "1.10.1",
       "supplier": "Organization: OpenJS Foundation",
       "originator": "Organization: OpenJS Foundation",
-      "downloadLocation": "https://github.com/jquery/jquery-ui/tree/1.10.1",
+      "downloadLocation": "NOASSERTION",
       "homepage": "https://jqueryui.com",
       "filesAnalyzed": true,
       "packageVerificationCode": {
@@ -120,8 +157,8 @@
         "MIT"
       ],
       "copyrightText": "Copyright (c) 2013 jQuery Foundation and other contributors",
-      "description": "jQuery UI custom build (all widgets and effects) with a ThemeRoller theme",
-      "comment": "bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out",
+      "description": "jQuery UI custom build (JavaScript and theme CSS) of 2013-02-28",
+      "comment": "Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -132,37 +169,37 @@
         {
           "referenceCategory": "SECURITY",
           "referenceType": "cpe23Type",
-          "referenceLocator": "cpe:2.3:a:jqueryui:jquery_ui:1.10.1:*:*:*:*:*:*:*"
+          "referenceLocator": "cpe:2.3:a:jquery:jquery_ui:1.10.1:*:*:*:*:*:*:*"
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2021-41182",
-          "comment": "CVE-2021-41182: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out."
+          "comment": "CVE-2021-41182: not_affected - Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product.."
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2021-41184",
-          "comment": "CVE-2021-41184: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out."
+          "comment": "CVE-2021-41184: not_affected - Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product.."
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2022-31160",
-          "comment": "CVE-2022-31160: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out."
+          "comment": "CVE-2022-31160: not_affected - Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product.."
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2016-7103",
-          "comment": "CVE-2016-7103: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out."
+          "comment": "CVE-2016-7103: not_affected - Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product.."
         },
         {
           "referenceCategory": "SECURITY",
           "referenceType": "advisory",
           "referenceLocator": "https://nvd.nist.gov/vuln/detail/CVE-2021-41183",
-          "comment": "CVE-2021-41183: not_affected - Not used by the product: bundled in src/resources and publicly served under /resources, but not loaded by any page; the @import in style.css is commented out."
+          "comment": "CVE-2021-41183: not_affected - Not used by the product: Bundled in src/resources and publicly served under /resources/, but not loaded by any page of the product.."
         }
       ]
     },
@@ -172,7 +209,7 @@
       "versionInfo": "2.6.2",
       "supplier": "Organization: Modernizr",
       "originator": "Organization: Modernizr",
-      "downloadLocation": "https://github.com/Modernizr/Modernizr/tree/v2.6.2",
+      "downloadLocation": "NOASSERTION",
       "homepage": "https://modernizr.com",
       "filesAnalyzed": true,
       "packageVerificationCode": {
@@ -197,9 +234,9 @@
       "licenseInfoFromFiles": [
         "LicenseRef-MIT-BSD"
       ],
-      "copyrightText": "Copyright (c) Faruk Ates, Paul Irish, Alex Sexton",
-      "description": "Modernizr 2.6.2 custom build",
-      "comment": "bundled in src/resources and publicly served under /resources, but not loaded by any page",
+      "copyrightText": "NOASSERTION",
+      "description": "Modernizr custom build",
+      "comment": "Bundled in src/resources/js and publicly served under /resources/, but not loaded by any page of the product.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -216,7 +253,6 @@
       "supplier": "Organization: Alex Sexton",
       "originator": "Organization: Alex Sexton",
       "downloadLocation": "NOASSERTION",
-      "homepage": "https://github.com/SlexAxton/yepnope.js",
       "filesAnalyzed": false,
       "checksums": [
         {
@@ -235,7 +271,7 @@
       "licenseConcluded": "WTFPL",
       "licenseDeclared": "WTFPL",
       "copyrightText": "NOASSERTION",
-      "description": "Resource loader, embedded in the Modernizr custom build",
+      "description": "yepnope resource loader, embedded in the Modernizr build",
       "comment": "Embedded in modernizr; the checksums are those of the containing file src/resources/js/modernizr.js.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
@@ -252,20 +288,20 @@
       "versionInfo": "4.2.0",
       "supplier": "Organization: Fonticons, Inc.",
       "originator": "Organization: Fonticons, Inc.",
-      "downloadLocation": "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css",
+      "downloadLocation": "NOASSERTION",
       "homepage": "https://fontawesome.com/v4/",
       "filesAnalyzed": true,
       "packageVerificationCode": {
         "packageVerificationCodeValue": "5738228b5d4ffdb98b89a94b25594e1359195baa"
       },
       "licenseConcluded": "OFL-1.1 AND MIT",
-      "licenseDeclared": "OFL-1.1 AND MIT",
+      "licenseDeclared": "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License",
       "licenseInfoFromFiles": [
-        "OFL-1.1 AND MIT"
+        "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License"
       ],
       "copyrightText": "NOASSERTION",
       "description": "Font Awesome icon font and CSS",
-      "comment": "loaded at runtime from a CDN by src/index.php; the CSS loads the font files",
+      "comment": "CSS loaded at runtime from a CDN by src/index.php (file icons on the standard pages); the CSS in turn loads the web fonts from the same CDN.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -281,13 +317,11 @@
       "supplier": "Organization: The PHP Group",
       "originator": "Organization: The PHP Group",
       "downloadLocation": "NOASSERTION",
-      "homepage": "https://www.php.net",
       "filesAnalyzed": false,
       "licenseConcluded": "PHP-3.01",
       "licenseDeclared": "PHP-3.01",
       "copyrightText": "NOASSERTION",
-      "description": "PHP runtime (README: version 7.2)",
-      "comment": "Provided by the deployment environment, not bundled; accepted versions >=7.2.",
+      "comment": "Provided by the deployment environment, not bundled; accepted versions >=7.2. Runs src/index.php, src/listDescriptions.php, the help pages and the webhook in src/autodeploy; the README names PHP 7.2 as the version in use.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -308,13 +342,11 @@
       "supplier": "Organization: The PHP Group",
       "originator": "Organization: The PHP Group",
       "downloadLocation": "NOASSERTION",
-      "homepage": "https://www.php.net/manual/en/book.zip.php",
       "filesAnalyzed": false,
       "licenseConcluded": "PHP-3.01",
       "licenseDeclared": "PHP-3.01",
       "copyrightText": "NOASSERTION",
-      "description": "ZipArchive, used by src/autodeploy to unpack release archives",
-      "comment": "Provided by the deployment environment, not bundled; accepted versions >=7.2.",
+      "comment": "Provided by the deployment environment, not bundled; accepted versions >=7.2. ZipArchive unpacks the release zip in src/autodeploy/releasecreated.php.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -330,13 +362,11 @@
       "supplier": "Organization: The PHP Group",
       "originator": "Organization: The PHP Group",
       "downloadLocation": "NOASSERTION",
-      "homepage": "https://www.php.net/manual/en/book.openssl.php",
       "filesAnalyzed": false,
       "licenseConcluded": "PHP-3.01",
       "licenseDeclared": "PHP-3.01",
       "copyrightText": "NOASSERTION",
-      "description": "Needed for file_get_contents on https URLs in src/autodeploy (configuration from raw.githubusercontent.com, release archives from github.com)",
-      "comment": "Provided by the deployment environment, not bundled; accepted versions >=7.2.",
+      "comment": "Provided by the deployment environment, not bundled; accepted versions >=7.2. Needed for fopen() and file_get_contents() on https URLs (GitHub configuration files and release zips) in src/autodeploy.",
       "primaryPackagePurpose": "OTHER",
       "externalRefs": [
         {
@@ -352,13 +382,11 @@
       "supplier": "Organization: The Apache Software Foundation",
       "originator": "Organization: The Apache Software Foundation",
       "downloadLocation": "NOASSERTION",
-      "homepage": "https://httpd.apache.org",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "copyrightText": "NOASSERTION",
-      "description": "Web server with mod_rewrite (rules in conf/apache2/rewrite-rules.txt)",
-      "comment": "Provided by the deployment environment, not bundled; accepted versions >=2.4.",
+      "comment": "Provided by the deployment environment, not bundled; accepted versions >=2.4. Serves the site and the directory listings with mod_rewrite, configured with conf/apache2/rewrite-rules.txt and conf/apache2/artefact-directories.txt (Require syntax of Apache 2.4).",
       "primaryPackagePurpose": "APPLICATION",
       "externalRefs": [
         {
@@ -465,7 +493,7 @@
       "licenseInfoInFiles": [
         "LicenseRef-MIT-BSD"
       ],
-      "copyrightText": "Copyright (c) Faruk Ates, Paul Irish, Alex Sexton"
+      "copyrightText": "NOASSERTION"
     },
     {
       "SPDXID": "SPDXRef-File-font-awesome-css-font-awesome.min.css",
@@ -486,7 +514,7 @@
       ],
       "licenseConcluded": "OFL-1.1 AND MIT",
       "licenseInfoInFiles": [
-        "OFL-1.1 AND MIT"
+        "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License"
       ],
       "copyrightText": "NOASSERTION",
       "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
@@ -510,58 +538,10 @@
       ],
       "licenseConcluded": "OFL-1.1 AND MIT",
       "licenseInfoInFiles": [
-        "OFL-1.1 AND MIT"
+        "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License"
       ],
       "copyrightText": "NOASSERTION",
       "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0"
-    },
-    {
-      "SPDXID": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.svg",
-      "fileName": "./fonts/fontawesome-webfont.svg",
-      "checksums": [
-        {
-          "algorithm": "SHA1",
-          "checksumValue": "cd980eab6db5fa57db670cb2e4278e67e1a4d6c9"
-        },
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "d5b5636ebb2e124810436200086b74a60dff9e8a8be7f4a1088bf5d3458bc3c8"
-        },
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "0920ae6b27ea8119e4697b974301a854686d3ca450197f95b0daab7647d8805e7e946dfda682ec2edb756a501cb170b2b89bffcdcdd5d1c17d165a0b99ec345f"
-        }
-      ],
-      "licenseConcluded": "OFL-1.1 AND MIT",
-      "licenseInfoInFiles": [
-        "OFL-1.1 AND MIT"
-      ],
-      "copyrightText": "NOASSERTION",
-      "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0"
-    },
-    {
-      "SPDXID": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.ttf",
-      "fileName": "./fonts/fontawesome-webfont.ttf",
-      "checksums": [
-        {
-          "algorithm": "SHA1",
-          "checksumValue": "6225ccc4ec94d060f19efab97ca42d842845b949"
-        },
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "4d6eb9e9d852a2a6f74e7c428456a2f07fc63a1613d10192d8ed3401d9da5ffa"
-        },
-        {
-          "algorithm": "SHA512",
-          "checksumValue": "ec66825d9579bc96301b5c123bcec3fe950ba75ee91301355494017cdd48c74d6d23886e3ad0929307e261200351013176bc7dcb4da1f13f7f9ef31bc395a5e1"
-        }
-      ],
-      "licenseConcluded": "OFL-1.1 AND MIT",
-      "licenseInfoInFiles": [
-        "OFL-1.1 AND MIT"
-      ],
-      "copyrightText": "NOASSERTION",
-      "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0"
     },
     {
       "SPDXID": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.woff",
@@ -582,10 +562,58 @@
       ],
       "licenseConcluded": "OFL-1.1 AND MIT",
       "licenseInfoInFiles": [
-        "OFL-1.1 AND MIT"
+        "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License"
       ],
       "copyrightText": "NOASSERTION",
       "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.ttf",
+      "fileName": "./fonts/fontawesome-webfont.ttf",
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "6225ccc4ec94d060f19efab97ca42d842845b949"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4d6eb9e9d852a2a6f74e7c428456a2f07fc63a1613d10192d8ed3401d9da5ffa"
+        },
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ec66825d9579bc96301b5c123bcec3fe950ba75ee91301355494017cdd48c74d6d23886e3ad0929307e261200351013176bc7dcb4da1f13f7f9ef31bc395a5e1"
+        }
+      ],
+      "licenseConcluded": "OFL-1.1 AND MIT",
+      "licenseInfoInFiles": [
+        "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License"
+      ],
+      "copyrightText": "NOASSERTION",
+      "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.svg",
+      "fileName": "./fonts/fontawesome-webfont.svg",
+      "checksums": [
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "cd980eab6db5fa57db670cb2e4278e67e1a4d6c9"
+        },
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d5b5636ebb2e124810436200086b74a60dff9e8a8be7f4a1088bf5d3458bc3c8"
+        },
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "0920ae6b27ea8119e4697b974301a854686d3ca450197f95b0daab7647d8805e7e946dfda682ec2edb756a501cb170b2b89bffcdcdd5d1c17d165a0b99ec345f"
+        }
+      ],
+      "licenseConcluded": "OFL-1.1 AND MIT",
+      "licenseInfoInFiles": [
+        "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License"
+      ],
+      "copyrightText": "NOASSERTION",
+      "comment": "Downloaded from https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0"
     }
   ],
   "hasExtractedLicensingInfos": [
@@ -593,6 +621,11 @@
       "licenseId": "LicenseRef-MIT-BSD",
       "name": "MIT & BSD",
       "extractedText": "License as stated by the component: \"MIT & BSD\""
+    },
+    {
+      "licenseId": "LicenseRef-Font-SIL-OFL-1.1-CSS-MIT-License",
+      "name": "Font: SIL OFL 1.1, CSS: MIT License",
+      "extractedText": "License as stated by the component: \"Font: SIL OFL 1.1, CSS: MIT License\""
     }
   ],
   "relationships": [
@@ -634,7 +667,7 @@
     {
       "spdxElementId": "SPDXRef-Package-font-awesome",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.svg"
+      "relatedSpdxElement": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.woff"
     },
     {
       "spdxElementId": "SPDXRef-Package-font-awesome",
@@ -644,7 +677,7 @@
     {
       "spdxElementId": "SPDXRef-Package-font-awesome",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.woff"
+      "relatedSpdxElement": "SPDXRef-File-font-awesome-fonts-fontawesome-webfont.svg"
     },
     {
       "spdxElementId": "SPDXRef-Package-product",
@@ -652,9 +685,19 @@
       "relatedSpdxElement": "SPDXRef-Package-jquery"
     },
     {
+      "spdxElementId": "SPDXRef-Package-jquery",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Package-sizzle"
+    },
+    {
       "spdxElementId": "SPDXRef-Package-product",
       "relationshipType": "CONTAINS",
       "relatedSpdxElement": "SPDXRef-Package-jquery-ui"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-jquery-ui",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-Package-jquery"
     },
     {
       "spdxElementId": "SPDXRef-Package-product",
