@@ -65,7 +65,6 @@ jobs:
             docker tag register:test "$image:$t"
             docker push --quiet "$image:$t"
           done
-          docker logout ghcr.io
           ref="$(docker inspect --format '{{index .RepoDigests 0}}' "$image:sha-${GITHUB_SHA::12}")"
           echo "image=$ref" >> "$GITHUB_OUTPUT"
           echo "name=$image" >> "$GITHUB_OUTPUT"
@@ -79,6 +78,11 @@ jobs:
           subject-name: ${{ steps.push.outputs.name }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+
+      # Pas na de attestatie: die pusht de handtekening met dezelfde inloggegevens.
+      - name: Afmelden bij GitHub Container Registry
+        if: always() && steps.push.outcome != 'skipped'
+        run: docker logout ghcr.io
 
   zad:
     needs: image
