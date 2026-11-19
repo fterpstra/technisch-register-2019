@@ -7,19 +7,25 @@
 # worden weggehaald. Gepubliceerde artefacten blijven staan: die zitten niet in het image.
 set -eu
 
+# Nieuwe bestanden schrijfbaar voor de groep: op een platform met een willekeurige uid deelt
+# een volgende start (met mogelijk een andere uid) alleen de groep 0 met deze.
+umask 0002
+
 base=/var/www/geostandaarden/v2
 code=/opt/register/src
 manifest="$base/.register-code-files"
 
 if ! touch "$base/.schrijftest" 2>/dev/null; then
-    echo "register: $base is niet beschrijfbaar voor uid $(id -u). Koppel daar blijvende opslag die deze gebruiker mag beschrijven." >&2
+    if grep -q " $base " /proc/mounts; then koppeling="er is opslag gekoppeld"; else koppeling="er is GEEN opslag gekoppeld"; fi
+    echo "register: $base is niet beschrijfbaar voor $(id). De map is van $(stat -c 'uid %u, gid %g, rechten %a' "$base"); $koppeling." >&2
+    echo "register: koppel blijvende opslag op $base die deze gebruiker of groep mag beschrijven (in Kubernetes: fsGroup, of groep 0 met schrijfrechten)." >&2
     exit 1
 fi
 rm -f "$base/.schrijftest"
 
 mkdir -p "$base/production" "$base/staging" "$base/backup" "$base/log/deliveries" "$base/tmp"
 
-new="$(mktemp)"
+new="$manifest.new"
 (cd "$code" && find . -type f | LC_ALL=C sort) > "$new"
 if [ -f "$manifest" ]; then
     LC_ALL=C comm -23 "$manifest" "$new" | while IFS= read -r f; do

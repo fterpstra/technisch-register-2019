@@ -21,9 +21,9 @@ check() { # check <omschrijving> <verwacht> <werkelijk>
     if [ "$2" = "$3" ]; then echo "ok    $1"; else echo "FOUT  $1: verwacht '$2', kreeg '$3'"; failures=$((failures + 1)); fi
 }
 
-start() {
+start() { # start [<--user uid:gid>]
     docker run -d --name "$name" -p "127.0.0.1:$port:8080" -v "$volume:/var/www/geostandaarden/v2" \
-        -e REGISTER_BASE_URL="$base/" -e REGISTER_WEBHOOK_SECRET="$secret" "$image" >/dev/null
+        -e REGISTER_BASE_URL="$base/" -e REGISTER_WEBHOOK_SECRET="$secret" "$@" "$image" >/dev/null
     i=0
     until curl -fs -o /dev/null "http://127.0.0.1:$port/resources/css/style.css"; do
         i=$((i + 1))
@@ -64,6 +64,23 @@ docker rm -f "$name" >/dev/null
 start
 check "na herstart: oude code weg" "404" "$(status "http://127.0.0.1:$port/oud.js")"
 check "na herstart: artefact behouden" "200" "$(status "http://127.0.0.1:$port/xmlschema/test/1.0/test.xsd")"
+
+# Een platform als OpenShift of ZAD start de container met een willekeurige uid in groep 0,
+# op dezelfde opslag als eerder.
+docker rm -f "$name" >/dev/null
+start --user 1001870000:0
+check "willekeurige uid: draait als 1001870000" "1001870000" "$(docker exec "$name" id -u)"
+check "willekeurige uid: code ververst" "200" "$(status "http://127.0.0.1:$port/resources/css/style.css")"
+check "willekeurige uid: artefact behouden" "200" "$(status "http://127.0.0.1:$port/xmlschema/test/1.0/test.xsd")"
+check "willekeurige uid: kan publiceren" "ok" \
+    "$(docker exec "$name" sh -c 'd=/var/www/geostandaarden/v2/production/regels/test; mkdir -p $d && echo x > $d/r.sch && rm -r $d && echo ok')"
+check "willekeurige uid: webhook" "200" \
+    "$(status -X POST -H 'X-GitHub-Event: ping' -H "X-Hub-Signature-256: $sig" -H 'Content-Type: application/json' -d "$body" "http://127.0.0.1:$port/autodeploy/releasecreated.php")"
+
+# Een opslag waar de container niet in mag schrijven: stoppen met een melding die de oorzaak noemt.
+docker rm -f "$name" >/dev/null
+melding="$(docker run --rm --user 1001870000:1001870000 -v "$volume:/var/www/geostandaarden/v2" "$image" 2>&1 || true)"
+check "niet-beschrijfbare opslag: melding" "1" "$(printf '%s' "$melding" | grep -c 'niet beschrijfbaar voor uid=1001870000.*er is opslag gekoppeld' || true)"
 
 if [ "$failures" -gt 0 ]; then
     echo "$failures controle(s) mislukt"; docker logs "$name" 2>&1 | tail -20; exit 1

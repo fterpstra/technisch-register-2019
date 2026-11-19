@@ -1,6 +1,6 @@
 # Technisch register in een container (ZAD)
 
-Het technisch register kan draaien als container op [ZAD](https://zad.rijksapp.nl), het platform voor Zelfservice Applicatie Deployment. Het image bevat Apache met PHP 8.4, de code uit `src/` en de Apache-instellingen uit `conf/apache2/`. De container draait rootless, als `www-data` (uid 33), en luistert op poort 8080.
+Het technisch register kan draaien als container op [ZAD](https://zad.rijksapp.nl), het platform voor Zelfservice Applicatie Deployment. Het image bevat Apache met PHP 8.4, de code uit `src/` en de Apache-instellingen uit `conf/apache2/`. De container draait rootless en luistert op poort 8080. Standaard draait hij als `www-data` (uid 33). Een platform dat zelf een willekeurige uid kiest, zoals OpenShift en ZAD, start hem in groep 0: alles waar de container in schrijft, is daarom schrijfbaar voor groep 0.
 
 ## Hoe het werkt
 
@@ -14,7 +14,7 @@ Alles wat het register schrijft, staat in `/var/www/geostandaarden/v2`, net als 
 | `log/` | `webhook.log` en de verwerkte deliveries |
 | `tmp/` | Uitgepakte releases tijdens de verwerking |
 
-Koppel daar blijvende opslag aan. Bij elke start zet de container de code uit het image in `production/`. Code die een vorige versie van het image daar zette en die nu niet meer bestaat, wordt weggehaald. Gepubliceerde artefacten blijven staan. Een nieuwe versie van het register uitrollen is dus: een nieuw image starten.
+Koppel daar blijvende opslag aan. De container moet erin kunnen schrijven: in Kubernetes zorgt `fsGroup` daarvoor. Kan dat niet, dan stopt de container met een melding die zegt met welke uid en groep hij draait, van wie de map is en of er opslag is gekoppeld. Bij elke start zet de container de code uit het image in `production/`. Code die een vorige versie van het image daar zette en die nu niet meer bestaat, wordt weggehaald. Gepubliceerde artefacten blijven staan. Een nieuwe versie van het register uitrollen is dus: een nieuw image starten.
 
 ## Instellingen
 

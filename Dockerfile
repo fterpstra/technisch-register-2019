@@ -1,6 +1,8 @@
 # Image van het technisch register: Apache met PHP (mod_php) en de code uit src/.
 #
-# De container draait rootless, als www-data (uid 33), en luistert op poort 8080.
+# De container draait rootless, standaard als www-data (uid 33), en luistert op poort 8080.
+# Een platform dat een willekeurige uid kiest (zoals OpenShift en ZAD), start hem met groep 0:
+# alles waar de container in schrijft, hoort daarom bij groep 0 en is schrijfbaar voor de groep.
 # Alles wat het register schrijft, staat in /var/www/geostandaarden/v2: koppel daar
 # blijvende opslag aan. Bij elke start zet de container de code uit dit image in
 # production/ van die opslag; de gepubliceerde artefacten blijven staan.
@@ -47,18 +49,20 @@ RUN set -eux; \
     a2dissite 000-default; \
     a2ensite register; \
     mkdir -p /var/run/apache2 /var/lock/apache2 /var/www/geostandaarden/v2; \
-    chown -R www-data:www-data /var/run/apache2 /var/lock/apache2 /var/www/geostandaarden/v2
+    chown -R www-data:0 /var/run/apache2 /var/lock/apache2 /var/www/geostandaarden/v2; \
+    chmod -R g=u /var/run/apache2 /var/lock/apache2 /var/www/geostandaarden/v2
 
 # De code staat alleen-lezen in het image; de entrypoint zet hem bij de start in de opslag.
 COPY src/ /opt/register/src/
 COPY docker/entrypoint.sh /usr/local/bin/register-entrypoint
-RUN chmod 0755 /usr/local/bin/register-entrypoint
+# Groepsschrijfbaar, zodat de kopie in de opslag dat ook is (cp neemt de rechten over).
+RUN chmod 0755 /usr/local/bin/register-entrypoint && chmod -R g+w /opt/register/src
 
 # Het platform maakt 's nachts zelf back-ups; het register bewaart daarom alleen de vorige
 # versie van elke standaard, wat ruimte spaart op de opslag.
 ENV REGISTER_BACKUPS_TO_KEEP=1
 
-USER 33:33
+USER 33:0
 EXPOSE 8080
 VOLUME ["/var/www/geostandaarden/v2"]
 ENTRYPOINT ["/usr/local/bin/register-entrypoint"]
